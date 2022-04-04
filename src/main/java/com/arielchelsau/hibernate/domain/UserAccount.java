@@ -1,7 +1,9 @@
 package com.arielchelsau.hibernate.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
+@ToString(exclude = {"creditCard"})
 @Data
 @NoArgsConstructor
 @Entity
@@ -28,7 +31,8 @@ public class UserAccount {
 
   private String emailAddress;
 
-  @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner", cascade= CascadeType.MERGE)
+  @EqualsAndHashCode.Exclude
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", cascade= CascadeType.MERGE)
   private List<CreditCard> creditCard = new ArrayList<>();
 
 }

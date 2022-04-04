@@ -20,13 +20,14 @@ public class UserAccountRepo {
   private EntityManager entityManager;
 
   @Transactional
-  public void saveUserAccount(UserAccount userAccount) {
-    entityManager.merge(userAccount);
+  public UserAccount saveUserAccount(UserAccount userAccount) {
+    return entityManager.merge(userAccount);
   }
 
   @Transactional
   public Optional<UserAccount> getUserAccount(Long id) {
-    return Optional.ofNullable(entityManager.find(UserAccount.class, id));
+    Optional<UserAccount> userAccount = Optional.ofNullable(entityManager.find(UserAccount.class, id));
+    return userAccount;
   }
 
   @Transactional

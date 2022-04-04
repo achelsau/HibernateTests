@@ -15,6 +15,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 /**
  * Unit test for simple App.
  */
@@ -32,28 +34,24 @@ public class AppTest {
     /**
      * Rigorous Test :-)
      */
+    @Transactional
     @Test
     public void shouldAnswerWithTrue() {
         UserAccount userAccount = new UserAccount();
         userAccount.setUsername("ariel2");
         userAccount.setEmailAddress("ariel@yahoo.com");
 
-        UserAccount userAccount3 = new UserAccount();
-        userAccount3.setUsername("ariel3");
-        userAccount3.setEmailAddress("ariel@yahoo.com");
+        CreditCard cc1 = new CreditCard();
+        cc1.setOwner(userAccount);
+        cc1.setCardNumber("0980789009890808");
 
         CreditCard cc2 = new CreditCard();
         cc2.setOwner(userAccount);
         cc2.setCardNumber("0980789009890809");
-        userAccount.setCreditCard(List.of(cc2));
-        //userAccountRepo.saveUserAccount(userAccount);
+        userAccount.setCreditCard(List.of(cc1, cc2));
+        userAccount = userAccountService.saveUserAccount(userAccount);
 
-        //userAccountService.saveUserAccount(userAccount);
-
-        UserAccount ua = userAccountRepo.getUserAccount(1L).get();
-        System.out.println(ua);
-
-        /*UserAccount ua = userAccountRepo.getUserAccountById(41L);
-        System.out.println("UA cc: " + ua.getCreditCards());*/
+        UserAccount ua = userAccountService.getUserAccount(userAccount.getId());
+        System.out.println(ua.getCreditCard().get(0).getCardNumber());
     }
 }
