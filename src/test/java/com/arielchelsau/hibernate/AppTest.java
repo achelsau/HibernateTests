@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -34,7 +35,6 @@ public class AppTest {
     /**
      * Rigorous Test :-)
      */
-    @Transactional
     @Test
     public void shouldAnswerWithTrue() {
         UserAccount userAccount = new UserAccount();
