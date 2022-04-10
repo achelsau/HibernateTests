@@ -52,6 +52,8 @@ public class AppTest {
         userAccount = userAccountService.saveUserAccount(userAccount);
 
         UserAccount ua = userAccountService.getUserAccount(userAccount.getId());
-        System.out.println(ua.getCreditCard().get(0).getCardNumber());
+        CreditCard creditCard = ua.getCreditCard().get(0);
+        System.out.println(creditCard.getCardNumber());
+        System.out.println(creditCard.getOwner());
     }
 }

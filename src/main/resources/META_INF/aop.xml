@@ -1,0 +1,8 @@
+<aspectj>
+    <aspects>
+        <aspect name="com.arielchelsau.hibernate.aspect.AspectP"/>
+        <weaver options="-verbose -showWeaveInfo">
+            <include within="org.hibernate.collection.internal.AbstractPersistentCollection"/>
+        </weaver>
+    </aspects>
+</aspectj>
