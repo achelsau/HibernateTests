@@ -38,7 +38,7 @@ public class AppTest {
     @Test
     public void shouldAnswerWithTrue() {
         UserAccount userAccount = new UserAccount();
-        userAccount.setUsername("ariel2");
+        userAccount.setUsername("ariel3");
         userAccount.setEmailAddress("ariel@yahoo.com");
 
         CreditCard cc1 = new CreditCard();
@@ -51,9 +51,20 @@ public class AppTest {
         userAccount.setCreditCard(List.of(cc1, cc2));
         userAccount = userAccountService.saveUserAccount(userAccount);
 
-        UserAccount ua = userAccountService.getUserAccount(userAccount.getId());
-        CreditCard creditCard = ua.getCreditCard().get(0);
+        userAccountService.saveUserAccount(userAccount);
+
+        //userAccountService.deleteUserAccounts(userAccount.getId());
+
+        /*CreditCard creditCard = userAccount.getCreditCard().get(0);
         System.out.println(creditCard.getCardNumber());
-        System.out.println(creditCard.getOwner());
+        System.out.println(creditCard.getOwner());*/
+        UserAccount userAccount1 = userAccountService.getUserAccount(userAccount.getId());
+        System.out.println("Version of UA: " + userAccount1.getVersion());
+        userAccount1.setUsername("Bla");
+        UserAccount userAccount2 = userAccountService.getUserAccount(userAccount.getId());
+        userAccountService.saveUserAccount(userAccount1);
+        userAccount2.setUsername("Bla 2");
+        userAccountService.saveUserAccount(userAccount2);
+        System.out.println("Version of UA: " + userAccount2.getVersion());
     }
 }

@@ -5,6 +5,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import org.hibernate.annotations.Cascade;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
+import javax.persistence.Version;
 
 @ToString(exclude = {"creditCard"})
 @Data
@@ -32,7 +35,10 @@ public class UserAccount {
   private String emailAddress;
 
   @EqualsAndHashCode.Exclude
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", cascade= CascadeType.MERGE)
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", cascade= CascadeType.ALL)
   private List<CreditCard> creditCard = new ArrayList<>();
+
+  @Version
+  private Integer version;
 
 }

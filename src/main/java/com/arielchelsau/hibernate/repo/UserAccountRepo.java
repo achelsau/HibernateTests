@@ -19,23 +19,20 @@ public class UserAccountRepo {
   @Autowired
   private EntityManager entityManager;
 
-  @Transactional
   public UserAccount saveUserAccount(UserAccount userAccount) {
     return entityManager.merge(userAccount);
   }
 
-  @Transactional
   public Optional<UserAccount> getUserAccount(Long id) {
     Optional<UserAccount> userAccount = Optional.ofNullable(entityManager.find(UserAccount.class, id));
     return userAccount;
   }
 
-  @Transactional
   public void deleteUserAccount(UserAccount userAccount) {
     entityManager.remove(userAccount);
   }
 
-  @Transactional
+
   public UserAccount getUserAccountById(Long id) {
     try {
       TypedQuery<UserAccount> query = entityManager
